@@ -3,19 +3,9 @@ import Title from '../home/Title';
 
 export default function HostelFilter({ ourRooms, setOurFilteredRooms }) {
   const [allowBreakfast, setAllowBreakfast] = useState(false);
-  const [allowlunch, setAllowlunch] = useState(false);
-  const [allowdinner, setAllowdinner] = useState(false);
-  const [mess, setmess] = useState(false);
-
-  // function to handle `room_type` filed filtering
-//   const roomTypeFiltering = (value) => {
-//     if (value === 'all') {
-//       setOurFilteredRooms(ourRooms);
-//     } else {
-//       const filteredRooms = ourRooms.filter((room) => room.room_type === value);
-//       setOurFilteredRooms(filteredRooms);
-//     }
-//   };
+  const [allowLunch, setAllowLunch] = useState(false);
+  const [allowDinner, setAllowDinner] = useState(false);
+  const [mess, setMess] = useState(false);
 
   // function to handle `room_price` filed filtering
   const roomPriceFiltering = (value) => {
@@ -34,22 +24,22 @@ export default function HostelFilter({ ourRooms, setOurFilteredRooms }) {
   }, [allowBreakfast]);
 
   useEffect(() => {
-    if (allowlunch) {
-      const filteredRooms = ourRooms.filter((room) => room.provide_lunch === allowlunch);
+    if (allowLunch) {
+      const filteredRooms = ourRooms.filter((room) => room.provide_lunch === allowLunch);
       setOurFilteredRooms(filteredRooms);
     } else {
       setOurFilteredRooms(ourRooms);
     }
-  }, [allowlunch]);
+  }, [allowLunch]);
 
   useEffect(() => {
-    if (allowdinner) {
-      const filteredRooms = ourRooms.filter((room) => room.provide_dinner === allowdinner);
+    if (allowDinner) {
+      const filteredRooms = ourRooms.filter((room) => room.provide_dinner === allowDinner);
       setOurFilteredRooms(filteredRooms);
     } else {
       setOurFilteredRooms(ourRooms);
     }
-  }, [allowdinner]);
+  }, [allowDinner]);
 
   // function to handle `allow_pets` filed filtering
   useEffect(() => {
@@ -63,15 +53,12 @@ export default function HostelFilter({ ourRooms, setOurFilteredRooms }) {
 
   return (
     <section className='filter-container'>
-      <Title title='filter hostels' />
+      <Title title='Filter Hostels' />
 
       <form className='filter-form'>
-        {/* select type start */}
-        {/* select type end */}
-
         {/* room price start */}
         <div className='form-group'>
-          <label htmlFor='price'>started price $ 100</label>
+          <label htmlFor='price'>Started Price $100</label>
           <input
             className='form-control'
             type='range'
@@ -104,8 +91,8 @@ export default function HostelFilter({ ourRooms, setOurFilteredRooms }) {
               name='lunch'
               type='checkbox'
               id='lunch'
-              checked={allowlunch}
-              onChange={() => setAllowlunch(!allowlunch)}
+              checked={allowLunch}
+              onChange={() => setAllowLunch(!allowLunch)}
             />
             <label htmlFor='lunch'>Lunch</label>
           </div>
@@ -115,8 +102,8 @@ export default function HostelFilter({ ourRooms, setOurFilteredRooms }) {
               name='dinner'
               type='checkbox'
               id='dinner'
-              checked={allowdinner}
-              onChange={() => setAllowdinner(!allowdinner)}
+              checked={allowDinner}
+              onChange={() => setAllowDinner(!allowDinner)}
             />
             <label htmlFor='dinner'>Dinner</label>
           </div>
@@ -126,7 +113,7 @@ export default function HostelFilter({ ourRooms, setOurFilteredRooms }) {
               type='checkbox'
               id='mess'
               checked={mess}
-              onChange={() => setmess(!mess)}
+              onChange={() => setMess(!mess)}
             />
             <label htmlFor='mess'>Mess</label>
           </div>

@@ -6,7 +6,10 @@
     "dev": "next dev -p 3034",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "vercel-build": "next build --no-lint",
+    "vercel-dev": "next dev",
+    "vercel-start": "next start"
   },
   "dependencies": {
     "@ant-design/icons": "^4.8.0",

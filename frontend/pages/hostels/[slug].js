@@ -9,11 +9,9 @@ import Banner from '../../components/home/Banner';
 import MainLayout from '../../components/layout';
 import StyledHero from '../../components/rooms/StyledHero';
 import Loading from '../../components/shared/Loading';
-import OrderPlaceModal from '../../components/utilities/OrderPlaceModal';
-import RoomReviewList from '../../components/utilities/RoomReviewList';
-import { getSessionToken, getSessionUser } from '../../utils/authentication';
-import notificationWithIcon from '../../utils/notification';
 import HostelOrderPlaceModal from '../../components/utilities/HostelOrderplace';
+import notificationWithIcon from '../../utils/notification';
+import { getSessionToken, getSessionUser } from '../../utils/authentication';
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -29,9 +27,7 @@ function HostelPreview(props) {
       notificationWithIcon('error', 'ERROR', 'Please Registration/Login first to place an order.');
       router.push('/auth/login');
     } else {
-      setBookingModal((prevState) => (
-        { ...prevState, open: true, roomId: props?.room?.data?.id }
-      ));
+      setBookingModal((prevState) => ({ ...prevState, open: true, roomId: props?.room?.data?.id }));
     }
   };
 
@@ -76,47 +72,26 @@ function HostelPreview(props) {
 
                 <article className='info'>
                   <h3>Information:</h3>
-                  <h6>
-                    {`Price : ₹ ${props?.room?.data?.hostel_price}`}
-                  </h6>
-                  <h6>
-                    {`Size : ${props?.room?.data?.hostel_size} SQFT`}
-                  </h6>
-                  <h6>
-                    {`Location : ${props?.room?.data?.hostel_location}`}
-                  </h6>
+                  <h6>{`Price : ₹ ${props?.room?.data?.hostel_price}`}</h6>
+                  <h6>{`Size : ${props?.room?.data?.hostel_size} SQFT`}</h6>
+                  <h6>{`Location : ${props?.room?.data?.hostel_location}`}</h6>
                   <h6>{props?.room?.data?.provide_breakfast && 'free breakfast included'}</h6>
                   <h6>{props?.room?.data?.provide_lunch && 'free lunch included'}</h6>
                   <h6>{props?.room?.data?.provide_dinner && 'free dinner included'}</h6>
 
-                  {props?.room?.data?.hostel_status === 'available' ? (
-                    <Button
-                      className='btn-primary'
-                      type='default'
-                      size='large'
-                      onClick={handleOrder}
-                    >
-                      Place Room Booking Order
-                    </Button>
-                  ) : (
-                    <Button
-                      className='btn-primary'
-                      type='default'
-                      size='large'
-                      disabled
-                    >
-                      Hostel Unavailable! Can&#39;t Place Order
-                    </Button>
-                  )}
+                  <Button
+                    className='btn-primary'
+                    type='default'
+                    size='large'
+                    onClick={handleOrder}
+                    disabled={props?.room?.data?.hostel_status !== 'available'}
+                  >
+                    {props?.room?.data?.hostel_status === 'available'
+                      ? 'Place Room Booking Order'
+                      : 'Hostel Unavailable! Can\'t Place Order'}
+                  </Button>
                 </article>
               </div>
-
-              {/* room reviews list */}
-              {/* <div className='single-room-images'>
-                {props?.room?.data?.id && (
-                  <RoomReviewList roomId={props?.room?.data?.id} />
-                )}
-              </div> */}
             </section>
           </>
         )}
@@ -140,7 +115,6 @@ export async function getServerSideProps(ctx) {
     const response = await axios.get(
       `${publicRuntimeConfig.API_BASE_URL}/api/v1/get-hostel-by-id-or-slug-name/${ctx.query.slug}`
     );
-    console.log();
     const room = response?.data?.result;
 
     return {

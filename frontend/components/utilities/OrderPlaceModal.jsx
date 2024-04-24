@@ -13,7 +13,7 @@ import notificationWithIcon from '../../utils/notification';
 
 const { confirm } = Modal;
 
-function OrderPlaceModal({ bookingModal, setBookingModal,slug }) {
+function OrderPlaceModal({ bookingModal, setBookingModal, slug }) {
   const [selectedDates, setSelectedDates] = useState([]);
   const router = useRouter();
   console.log(slug);

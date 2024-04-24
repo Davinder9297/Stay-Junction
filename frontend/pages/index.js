@@ -1,4 +1,3 @@
-import { Empty, Result, Skeleton } from 'antd';
 import axios from 'axios';
 import getConfig from 'next/config';
 import Link from 'next/link';
@@ -12,7 +11,7 @@ import CitiesHostel from '../components/home/Citiesforhostels';
 
 const { publicRuntimeConfig } = getConfig();
 
-function Home(props) {
+function Home() {
   return (
     <MainLayout title='Stay Junction ― Home'>
       <Hero>
@@ -25,48 +24,9 @@ function Home(props) {
           </Link>
         </Banner>
       </Hero>
-      
-
-      <Featured/>
-      <CitiesHostel/>
+      <Featured />
+      <CitiesHostel />
       <Services />
-      {/* featured rooms */}
-      {/* <Skeleton loading={!props?.featuredRooms && !props?.error} paragraph={{ rows: 5 }} active>
-        {props?.featuredRooms?.data?.rows?.length === 0 ? (
-          <Empty
-            className='mt-10'
-            description={(<span>Sorry! Any data was not found.</span>)}
-          />
-        ) : props?.error ? (
-          <Result
-            title='Failed to fetch'
-            subTitle={props?.error?.message || 'Sorry! Something went wrong. App server error'}
-            status='error'
-          />
-        ) : (
-          <FeaturedRooms
-            featuredRoom={props?.featuredRooms?.data?.rows}
-          />
-        )}
-      </Skeleton>
-      <Skeleton loading={!props?.featuredHostel && !props?.error} paragraph={{ rows: 5 }} active>
-        {props?.featuredHostel?.data?.rows?.length === 0 ? (
-          <Empty
-            className='mt-10'
-            description={(<span>Sorry! Any data was not found.</span>)}
-          />
-        ) : props?.error ? (
-          <Result
-            title='Failed to fetch'
-            subTitle={props?.error?.message || 'Sorry! Something went wrong. App server error'}
-            status='error'
-          />
-        ) : (
-          <FeaturedHostels
-            featuredRoom={props?.featuredHostel?.data?.rows}
-          />
-        )}
-      </Skeleton> */}
     </MainLayout>
   );
 }

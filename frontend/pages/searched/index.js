@@ -1,5 +1,4 @@
-import { Empty, Result, Skeleton } from 'antd';
-import axios from 'axios';
+import { Empty, Skeleton } from 'antd';
 import getConfig from 'next/config';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
@@ -8,31 +7,30 @@ import Hero from '../../components/home/Hero';
 import MainLayout from '../../components/layout';
 import RoomFilter from '../../components/rooms/RoomsFilter';
 import RoomList from '../../components/rooms/RoomsList';
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation';
+
 const { publicRuntimeConfig } = getConfig();
 
 function Searched() {
   const [ourRooms, setOurRooms] = useState([]);
   const [ourFilteredRooms, setOurFilteredRooms] = useState([]);
-  const search=useSearchParams()
-const [responsedata, setresponsedata] = useState()
+  const search = useSearchParams();
+  const [responsedata, setresponsedata] = useState();
 
-  // if props rooms exists to setOurRooms
+  // Fetch data based on search parameters
   useEffect(() => {
-    async function Fetchdata(){
-        try {
-    
-            const data1=await fetch(`${publicRuntimeConfig.API_BASE_URL}/api/v1/all-rooms-list-by-city?keyword=${search?.get('city')}`)
-            const response=await data1.json()
-            // console.log(response);
-            setresponsedata(response?.result)
-            setOurFilteredRooms(response?.result?.data?.rows)
-            setOurRooms(response?.result?.data?.rows)
-          } catch (error) {
-            console.log(error);
-          }
+    async function fetchData() {
+      try {
+        const data1 = await fetch(`${publicRuntimeConfig.API_BASE_URL}/api/v1/all-rooms-list-by-city?keyword=${search?.get('city')}`);
+        const response = await data1.json();
+        setresponsedata(response?.result);
+        setOurFilteredRooms(response?.result?.data?.rows);
+        setOurRooms(response?.result?.data?.rows);
+      } catch (error) {
+        console.log(error);
+      }
     }
-  Fetchdata()
+    fetchData();
   }, [search?.get('city')]);
 
   return (
@@ -45,28 +43,19 @@ const [responsedata, setresponsedata] = useState()
         </Banner>
       </Hero>
 
-      {/* featured rooms */}
+      {/* Display skeleton while loading */}
       <Skeleton loading={!responsedata} paragraph={{ rows: 10 }} active>
         {responsedata?.data?.rows?.length === 0 ? (
-          <Empty
-            className='mt-10'
-            description={(<span>Sorry! Any data was not found.</span>)}
-          /> 
+          <Empty className='mt-10' description={(<span>Sorry! Any data was not found.</span>)} />
         ) : (
-            <>
-            <RoomFilter
-              ourRooms={ourRooms}
-              setOurFilteredRooms={setOurFilteredRooms}
-            />
-            <RoomList
-              rooms={ourFilteredRooms}
-            />
+          <>
+            <RoomFilter ourRooms={ourRooms} setOurFilteredRooms={setOurFilteredRooms} />
+            <RoomList rooms={ourFilteredRooms} />
           </>
         )}
       </Skeleton>
     </MainLayout>
   );
 }
-
 
 export default Searched;

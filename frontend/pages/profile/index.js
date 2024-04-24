@@ -79,7 +79,7 @@ function Profile() {
                   </span>
                 ),
                 children: <HostelBookingHistory />
-              },
+              }
             ]}
           />
         </div>
