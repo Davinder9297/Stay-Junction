@@ -12,7 +12,7 @@ function Hostel({ room }) {
 
         <div className='price-top'>
           <h6>{`₹ ${room?.hostel_price}`}</h6>
-          <p>per night</p>
+          <p>per month</p>
         </div>
 
         <Link

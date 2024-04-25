@@ -17,7 +17,7 @@ function Home() {
       <Hero>
         <Banner
           title='luxurious hotels'
-          subtitle='deluxe hotel starting at ₹1000'
+          subtitle='deluxe hotel starting at ₹800'
         >
           <Link href='/rooms' className='btn-primary'>
             our hotels

@@ -30,7 +30,7 @@ function MyProfile() {
     method: 'put',
     headers: { authorization: `Bearer ${token}` },
     onChange(info) {
-      if (info.file.status === 'done') {
+      if (info?.file?.status === 'done') {
         // Handle response from API
         if (info?.file?.response?.result_code === 0) {
           notificationWithIcon('success', 'SUCCESS', info?.file?.response?.result?.message || 'Your avatar change successful');

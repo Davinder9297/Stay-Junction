@@ -58,15 +58,15 @@ export default function HostelFilter({ ourRooms, setOurFilteredRooms }) {
       <form className='filter-form'>
         {/* room price start */}
         <div className='form-group'>
-          <label htmlFor='price'>Started Price $100</label>
+          <label htmlFor='price'>Started Price ₹6000</label>
           <input
             className='form-control'
             type='range'
             name='price'
             id='price'
-            min={100}
-            max={1000}
-            defaultValue={1000}
+            min={6000}
+            max={50000}
+            defaultValue={6000}
             onChange={(e) => roomPriceFiltering(e.target.value)}
           />
         </div>

@@ -196,7 +196,7 @@ exports.avatarUpdate = async (req, res) => {
     if (file) {
       // if find to delete user old avatar
       if (user?.avatar?.includes('/uploads/users')) {
-        fs.unlink(`${appRoot}/public/${user.avatar}`, (err) => {
+        fs.unlink(`${appRoot}/public/${user?.avatar}`, (err) => {
           if (err) { logger.error(err); }
         });
       }

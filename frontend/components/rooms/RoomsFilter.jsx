@@ -67,15 +67,15 @@ export default function RoomFilter({ ourRooms, setOurFilteredRooms }) {
 
         {/* room price start */}
         <div className='form-group'>
-          <label htmlFor='price'>started price $ 100</label>
+          <label htmlFor='price'>started price ₹800</label>
           <input
             className='form-control'
             type='range'
             name='price'
             id='price'
-            min={100}
-            max={1000}
-            defaultValue={1000}
+            min={800}
+            max={5000}
+            defaultValue={800}
             onChange={(e) => roomPriceFiltering(e.target.value)}
           />
         </div>
