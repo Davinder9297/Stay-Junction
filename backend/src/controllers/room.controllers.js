@@ -1043,18 +1043,18 @@ exports.editHostelByAdmin = async (req, res) => {
       ));
     }
     // check `req.files[0]` filed exits
-    if (!req.files[0]) {
-      for (const element of req.files) {
-        fs.unlink(`${appRoot}/public/uploads/rooms/${element.filename}`, (err) => {
-          if (err) { logger.error(err); }
-        });
-      }
-      return res.status(400).json(errorResponse(
-        1,
-        'FAILED',
-        'Minimum 1 `hostel_images` filed is required '
-      ));
-    }
+    // if (!req.files[0]) {
+    //   for (const element of req.files) {
+    //     fs.unlink(`${appRoot}/public/uploads/rooms/${element.filename}`, (err) => {
+    //       if (err) { logger.error(err); }
+    //     });
+    //   }
+    //   return res.status(400).json(errorResponse(
+    //     1,
+    //     'FAILED',
+    //     'Minimum 1 `hostel_images` filed is required '
+    //   ));
+    // }
 
     // finding by room by room id
     let room = null;
