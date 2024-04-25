@@ -2,9 +2,9 @@ const allowedOrigins = [
   'http://localhost:3033',
   'http://localhost:3034',
   'http://localhost:5500',
-  'https://api-beach-resort.srmukul.com',
-  'https://admin-beach-resort.vercel.app',
-  'https://mukul-beach-resort.vercel.app'
+  'https://stay-junction.onrender.com',
+  'https://stay-junction.vercel.app',
+  'https://admin-stay-junction.vercel.app'
 ];
 
 const corsOptions = {
