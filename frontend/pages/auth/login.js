@@ -82,12 +82,12 @@ function Login() {
                 <Checkbox>Remember me</Checkbox>
               </Form.Item>
 
-              <Link
+              {/* <Link
                 className='btn-forgot-password'
                 href='/auth/forgot-password'
               >
                 Forgot Password
-              </Link>
+              </Link> */}
             </Form.Item>
 
             <Form.Item>
