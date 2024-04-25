@@ -884,13 +884,13 @@ exports.editRoomByAdmin = async (req, res) => {
     }
 
     // delete room old images
-    (() => {
-      for (const element of room.room_images) {
-        fs.unlink(`${appRoot}/public/${element.url}`, (err) => {
-          if (err) { logger.error(err); }
-        });
-      }
-    })();
+    // (() => {
+    //   for (const element of room.room_images) {
+    //     fs.unlink(`${appRoot}/public/${element.url}`, (err) => {
+    //       if (err) { logger.error(err); }
+    //     });
+    //   }
+    // })();
 
     // update room info & save database
     const updatedRoom = await Room.findByIdAndUpdate(
@@ -1072,13 +1072,13 @@ exports.editHostelByAdmin = async (req, res) => {
     }
 
     // delete room old images
-    (() => {
-      for (const element of room.hostel_images) {
-        fs.unlink(`${appRoot}/public/${element.url}`, (err) => {
-          if (err) { logger.error(err); }
-        });
-      }
-    })();
+    // (() => {
+    //   for (const element of room.hostel_images) {
+    //     fs.unlink(`${appRoot}/public/${element.url}`, (err) => {
+    //       if (err) { logger.error(err); }
+    //     });
+    //   }
+    // })();
 
     // update room info & save database
     const updatedRoom = await Hostels.findByIdAndUpdate(
