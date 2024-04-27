@@ -13,7 +13,7 @@ export default function HostelList({ rooms }) {
 
   return (
     <section className='rooms-list'>
-      <div className='rooms-list-center'>
+      <div className='flex flex-col gap-y-10'>
         {rooms.map((room) => (
           <Hostel key={uniqueId()} room={room} />
         ))}

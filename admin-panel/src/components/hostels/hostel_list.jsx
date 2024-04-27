@@ -93,7 +93,7 @@ function HostelList({ add }) {
                           Hostel Name
                         </th>
                         <th className='data-table-head-tr-th text-center' scope='col'>
-                          Total Rooms
+                          Hostel Location
                         </th>
                         <th className='data-table-head-tr-th' scope='col'>
                           Hostel Price
@@ -133,7 +133,7 @@ function HostelList({ add }) {
                             {data?.hostel_name}
                           </td>
                           <td className='data-table-body-tr-td text-center'>
-                            {data?.hostel_room}
+                            {data?.hostel_location}
                           </td>
                           <td className='data-table-body-tr-td !lowercase'>
                             {`₹ ${data?.hostel_price}`}

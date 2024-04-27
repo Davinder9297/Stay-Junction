@@ -4,70 +4,56 @@ import Title from '../home/Title';
 export default function RoomFilter({ ourRooms, setOurFilteredRooms }) {
   const [allowBreakfast, setAllowBreakfast] = useState(false);
   const [allowPets, setAllowPets] = useState(false);
+  const [cities, setCities] = useState({
+    Delhi: false,
+    Mumbai: false,
+    Kolkata: false,
+    Bangalore: false,
+    Bareilly: false,
+    Chennai: false,
+  });
+  const [priceRange, setPriceRange] = useState([800, 5000]); // Default price range
 
-  // function to handle `room_type` filed filtering
-  const roomTypeFiltering = (value) => {
-    if (value === 'all') {
-      setOurFilteredRooms(ourRooms);
-    } else {
-      const filteredRooms = ourRooms.filter((room) => room.room_type === value);
-      setOurFilteredRooms(filteredRooms);
+  // Function to filter rooms based on checkboxes and price range
+  const filterRooms = () => {
+    let filteredRooms = [...ourRooms];
+
+    // Filter by price range
+    filteredRooms = filteredRooms.filter((room) => room.room_price >= priceRange[0] && room.room_price <= priceRange[1]);
+
+    // Filter by breakfast availability
+    if (allowBreakfast) {
+      filteredRooms = filteredRooms.filter((room) => room.provide_breakfast);
     }
-  };
 
-  // function to handle `room_price` filed filtering
-  const roomPriceFiltering = (value) => {
-    const filteredRooms = ourRooms.filter((room) => room.room_price <= parseInt(value, 10));
+    // Filter by pet allowance
+    if (allowPets) {
+      filteredRooms = filteredRooms.filter((room) => room.allow_pets);
+    }
+
+    // Filter by selected cities
+    const selectedCities = Object.keys(cities).filter((city) => cities[city]);
+    if (selectedCities.length > 0) {
+      filteredRooms = filteredRooms.filter((room) => selectedCities.includes(room.room_city));
+    }
+
+    // Update filtered rooms state
     setOurFilteredRooms(filteredRooms);
   };
 
-  // function to handle `provide_breakfast` filed filtering
+  // useEffect to trigger filtering whenever any checkbox state or price range changes
   useEffect(() => {
-    if (allowBreakfast) {
-      const filteredRooms = ourRooms.filter((room) => room.provide_breakfast === allowBreakfast);
-      setOurFilteredRooms(filteredRooms);
-    } else {
-      setOurFilteredRooms(ourRooms);
-    }
-  }, [allowBreakfast]);
-
-  // function to handle `allow_pets` filed filtering
-  useEffect(() => {
-    if (allowPets) {
-      const filteredRooms = ourRooms.filter((room) => room.allow_pets === allowPets);
-      setOurFilteredRooms(filteredRooms);
-    } else {
-      setOurFilteredRooms(ourRooms);
-    }
-  }, [allowPets]);
+    filterRooms();
+  }, [allowBreakfast, allowPets, cities, priceRange]);
 
   return (
     <section className='filter-container'>
-      <Title title='filter hotels' />
+      <Title title='Filter Hotels' />
 
       <form className='filter-form'>
-        {/* select type start */}
+        {/* Price range */}
         <div className='form-group'>
-          <label htmlFor='type'>hotel type</label>
-          <select
-            className='form-control'
-            onChange={(e) => roomTypeFiltering(e.target.value)}
-            defaultValue='all'
-            name='type'
-            id='type'
-          >
-            <option value='all'>All</option>
-            <option value='single'>Single</option>
-            <option value='couple'>Couple</option>
-            <option value='family'>Family</option>
-            <option value='presidential'>Presidential</option>
-          </select>
-        </div>
-        {/* select type end */}
-
-        {/* room price start */}
-        <div className='form-group'>
-          <label htmlFor='price'>started price ₹800</label>
+          <label htmlFor='price'>Price Range</label>
           <input
             className='form-control'
             type='range'
@@ -75,15 +61,15 @@ export default function RoomFilter({ ourRooms, setOurFilteredRooms }) {
             id='price'
             min={800}
             max={5000}
-            defaultValue={800}
-            onChange={(e) => roomPriceFiltering(e.target.value)}
+            value={priceRange[1]}
+            onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value, 10)])}
           />
+          <span>₹{priceRange[0]} - ₹{priceRange[1]}</span>
         </div>
-        {/* room price end */}
 
-        {/* extras start */}
+        {/* Extras start */}
         <div className='form-group'>
-          {/* breakfast checked */}
+          {/* Breakfast checked */}
           <div className='single-extra'>
             <input
               name='breakfast'
@@ -92,10 +78,10 @@ export default function RoomFilter({ ourRooms, setOurFilteredRooms }) {
               checked={allowBreakfast}
               onChange={() => setAllowBreakfast(!allowBreakfast)}
             />
-            <label htmlFor='breakfast'>breakfast</label>
+            <label htmlFor='breakfast'>Breakfast</label>
           </div>
 
-          {/* pets checked */}
+          {/* Pets checked */}
           <div className='single-extra'>
             <input
               type='checkbox'
@@ -104,10 +90,25 @@ export default function RoomFilter({ ourRooms, setOurFilteredRooms }) {
               checked={allowPets}
               onChange={() => setAllowPets(!allowPets)}
             />
-            <label htmlFor='pets'>pets</label>
+            <label htmlFor='pets'>Pets</label>
           </div>
         </div>
-        {/* extras end */}
+
+        <div className='form-group'>
+          {/* City checkboxes */}
+          {Object.keys(cities).map((city) => (
+            <div key={city} className='single-extra'>
+              <input
+                type='checkbox'
+                id={city}
+                checked={cities[city]}
+                onChange={() => setCities((prevCities) => ({ ...prevCities, [city]: !prevCities[city] }))}
+              />
+              <label htmlFor={city}>{city}</label>
+            </div>
+          ))}
+        </div>
+        {/* Extras end */}
       </form>
     </section>
   );

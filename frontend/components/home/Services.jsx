@@ -11,7 +11,7 @@ function Services() {
       <div className='services-center'>
         {services?.map((item) => (
           <article key={uniqueId()} className='services'>
-            <span>{item.icon}</span>
+            <div className='flex justify-center'>{item.icon}</div>
             <h6>{item.title}</h6>
             <p>{item.info}</p>
           </article>

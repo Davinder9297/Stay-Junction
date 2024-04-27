@@ -28,7 +28,7 @@ audit.json
 
 
 # uploads folder
-/public/uploads
+
 
 # test report
 /coverage

@@ -118,7 +118,6 @@ function HostelOrderPlaceModal({ bookingModal, setBookingModal, slug }) {
             />
           ]}
           minDate={new Date(new Date()).setDate(new Date().getDate() + 1)}
-          maxDate={new Date(new Date()).setDate(new Date().getDate() + 30)}
           onChange={handleDateChange}
           value={selectedDates}
           format='YYYY/MM/DD'

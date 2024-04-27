@@ -7,7 +7,7 @@ import { v4 as uniqueId } from 'uuid';
 import useFetchData from '../../hooks/useFetchData';
 import ApiService from '../../utils/apiService';
 import notificationWithIcon from '../../utils/notification';
-import { roomStatusAsResponse, roomTypeAsColor } from '../../utils/responseAsStatus';
+import { roomStatusAsResponse } from '../../utils/responseAsStatus';
 import QueryOptions from '../shared/QueryOptions';
 import RoomEdit from './RoomEdit';
 
@@ -92,16 +92,16 @@ function RoomsList({ add }) {
                           Hotel Name
                         </th>
                         <th className='data-table-head-tr-th text-center' scope='col'>
-                          Hotel Type
+                          Hotel Location
                         </th>
                         <th className='data-table-head-tr-th' scope='col'>
                           Hotel Price
                         </th>
                         <th className='data-table-head-tr-th' scope='col'>
-                          Hotel Size
+                          Room Size
                         </th>
                         <th className='data-table-head-tr-th text-center' scope='col'>
-                          Hotel Status
+                          Room Status
                         </th>
                         <th className='data-table-head-tr-th text-center' scope='col'>
                           Hotel Actions
@@ -128,13 +128,8 @@ function RoomsList({ add }) {
                           <td className='data-table-body-tr-td'>
                             {data?.room_name}
                           </td>
-                          <td className='data-table-body-tr-td text-center'>
-                            <Tag
-                              className='text-center uppercase'
-                              color={roomTypeAsColor(data?.room_type)}
-                            >
-                              {data?.room_type}
-                            </Tag>
+                          <td className='data-table-body-tr-td '>
+                            {`${data?.room_location}`}
                           </td>
                           <td className='data-table-body-tr-td !lowercase'>
                             {`₹ ${data?.room_price}`}

@@ -4,7 +4,7 @@ import {
 import React from 'react';
 import { v4 as uniqueId } from 'uuid';
 import useFetchData from '../../hooks/useFetchData';
-import { roomStatusAsResponse, roomTypeAsColor } from '../../utils/responseAsStatus';
+import { roomStatusAsResponse } from '../../utils/responseAsStatus';
 
 function RoomDetails({ id }) {
   // fetch room-details API data
@@ -45,27 +45,23 @@ function RoomDetails({ id }) {
             {response?.data?.room_name}
           </Descriptions.Item>
           <Descriptions.Item
-            label={<span className='whitespace-nowrap'>Hotel Slug</span>}
+            label={<span className='whitespace-nowrap'>Hotel Distance</span>}
             span={2}
+          >
+            {`${response?.data?.room_distance} KM`}
+          </Descriptions.Item>
+          <Descriptions.Item
+            label={<span className='whitespace-nowrap'>Hotel Slug</span>}
+            span={1}
           >
             {response?.data?.room_slug}
           </Descriptions.Item>
 
           <Descriptions.Item
-            label={<span className='whitespace-nowrap'>Hotel Type</span>}
-          >
-            <Tag
-              className='text-center uppercase'
-              color={roomTypeAsColor(response?.data?.room_type)}
-            >
-              {response?.data?.room_type}
-            </Tag>
-          </Descriptions.Item>
-          <Descriptions.Item
             label={<span className='whitespace-nowrap'>Hotel Price</span>}
             span={2}
           >
-            {`$ ${response?.data?.room_price}`}
+            {`₹ ${response?.data?.room_price}`}
           </Descriptions.Item>
 
           <Descriptions.Item
@@ -74,7 +70,7 @@ function RoomDetails({ id }) {
             {`${response?.data?.room_size} sq. ft.`}
           </Descriptions.Item>
           <Descriptions.Item
-            label={<span className='whitespace-nowrap'>Hotel Capacity</span>}
+            label={<span className='whitespace-nowrap'>Hotel Room Capacity</span>}
             span={2}
           >
             {`${response?.data?.room_capacity} Person`}

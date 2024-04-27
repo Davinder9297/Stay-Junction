@@ -25,9 +25,9 @@ function CreateRoom() {
     const formdata = new FormData();
     formdata.append('room_name', values.room_name);
     formdata.append('room_city', values.room_city);
+    formdata.append('room_distance', values.room_distance);
     formdata.append('room_slug', values.room_slug);
     formdata.append('room_location', values.room_location);
-    formdata.append('room_type', values.room_type);
     formdata.append('room_price', values.room_price);
     formdata.append('room_size', values.room_size);
     formdata.append('room_capacity', values.room_capacity);
@@ -110,7 +110,7 @@ function CreateRoom() {
       </div>
 
       <div className='two-grid-column'>
-        <Form.Item
+        {/* <Form.Item
           className='w-full md:w-1/2'
           label='Hotel Type'
           name='room_type'
@@ -131,20 +131,38 @@ function CreateRoom() {
             size='large'
             allowClear
           />
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item
           className='w-full md:w-1/2'
-          label='Hotel Price'
+          label='Room Price'
           name='room_price'
           rules={[{
             required: true,
-            message: 'Please input your Hotel Price!'
+            message: 'Please input your Room Price!'
           }]}
         >
           <InputNumber
             className='w-full'
-            placeholder='Hotel Price'
+            placeholder='Room Price'
+            type='number'
+            size='large'
+            min={1}
+            max={100000}
+          />
+        </Form.Item>
+        <Form.Item
+          className='w-full md:w-1/2'
+          label='Hotel Distance'
+          name='room_distance'
+          rules={[{
+            required: true,
+            message: 'Please input your Hotel Distance!'
+          }]}
+        >
+          <InputNumber
+            className='w-full'
+            placeholder='Hotel Distance'
             type='number'
             size='large'
             min={1}

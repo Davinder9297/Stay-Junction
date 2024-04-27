@@ -40,8 +40,8 @@ const Featured = () => {
     <>
       <div className="trending">Explore Hotels</div>
       <div className="searchfeatured">
-        <input value={city} onChange={(e) => setCity(e.target.value)} placeholder="Search hotels by city.." />
-        <Link href={`/searched?city=${city}`} className="searchbutton">Search</Link>
+        <input className='border ' value={city} onChange={(e) => setCity(e.target.value)} placeholder="Search hotels by city.." />
+        <Link href={`/searched?city=${city}`} className="searchbutton ">Search</Link>
       </div>
       <div className="featured">
         {dummydata.map((data, index) => (

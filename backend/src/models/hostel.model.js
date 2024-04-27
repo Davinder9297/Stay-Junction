@@ -6,6 +6,10 @@ const roomsSchema = new mongoose.Schema({
     unique: true,
     required: [true, 'Room name filed is required']
   },
+    hostel_distance: {
+      type: Number,
+      required: [true, 'Hostel distance filed is required']
+  },
   hostel_location: {
     type: String,
     unique: true,

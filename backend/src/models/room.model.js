@@ -6,6 +6,10 @@ const roomsSchema = new mongoose.Schema({
     unique: true,
     required: [true, 'Room name filed is required']
   },
+  room_distance: {
+    type: Number,
+    required: [true, 'Room Distance filed is required']
+  },
   room_slug: {
     type: String,
     trim: true,
@@ -15,8 +19,6 @@ const roomsSchema = new mongoose.Schema({
   },
   room_type: {
     type: String,
-    enum: ['single', 'couple', 'family', 'presidential'],
-    required: [true, 'Room type filed is required']
   },
   room_price: {
     type: Number,

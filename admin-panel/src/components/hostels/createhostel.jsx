@@ -34,6 +34,7 @@ function CreateHostel() {
     const formdata = new FormData();
     formdata.append('hostel_name', values.hostel_name);
     formdata.append('hostel_slug', values.hostel_slug);
+    formdata.append('hostel_distance', values.hostel_distance);
     formdata.append('hostel_price', values.hostel_price);
     formdata.append('hostel_size', values.hostel_size);
     formdata.append('hostel_room', values.hostel_room);
@@ -160,16 +161,16 @@ function CreateHostel() {
       <div className='two-grid-column'>
         <Form.Item
           className='w-full md:w-1/2'
-          label='Hostel Size'
+          label='Hostel Room Size'
           name='hostel_size'
           rules={[{
             required: true,
-            message: 'Please input your Hostel Size!'
+            message: 'Please input your Hostel Room Size!'
           }]}
         >
           <InputNumber
             className='w-full'
-            placeholder='Hostel Size'
+            placeholder='Hostel Room Size'
             type='number'
             size='large'
             min={1}
@@ -195,7 +196,27 @@ function CreateHostel() {
           />
         </Form.Item>
       </div>
+      <div className=''>
+        <Form.Item
+          className='w-full md:w-1/2'
+          label='Hostel Distance'
+          name='hostel_distance'
+          rules={[{
+            required: true,
+            message: 'Please input your Hostel Distance!'
+          }]}
+        >
+          <InputNumber
+            className='w-full'
+            placeholder='Hostel Distance'
+            type='number'
+            size='large'
+            min={1}
+            max={1000}
+          />
+        </Form.Item>
 
+      </div>
       <Form.Item
         label='Hostel Description'
         name='hostel_description'

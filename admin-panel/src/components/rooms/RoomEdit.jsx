@@ -30,7 +30,7 @@ function RoomEdit({ roomEditModal, setRoomEditModal }) {
         room_slug: fetchResponse?.data?.room_slug || undefined,
         room_location: fetchResponse?.data?.room_location || undefined,
         room_city: fetchResponse?.data?.room_city || undefined,
-        room_type: fetchResponse?.data?.room_type || undefined,
+        room_distance: fetchResponse?.data?.room_distance || undefined,
         room_price: fetchResponse?.data?.room_price || undefined,
         room_size: fetchResponse?.data?.room_size || undefined,
         room_capacity: fetchResponse?.data?.room_capacity || undefined,
@@ -55,8 +55,8 @@ function RoomEdit({ roomEditModal, setRoomEditModal }) {
     formdata.append('room_name', values.room_name);
     formdata.append('room_slug', values.room_slug);
     formdata.append('room_location', values.room_location);
+    formdata.append('room_distance', values.room_distance);
     formdata.append('room_city', values.room_city);
-    formdata.append('room_type', values.room_type);
     formdata.append('room_price', values.room_price);
     formdata.append('room_size', values.room_size);
     formdata.append('room_capacity', values.room_capacity);
@@ -162,28 +162,6 @@ function RoomEdit({ roomEditModal, setRoomEditModal }) {
           <div className='two-grid-column'>
             <Form.Item
               className='w-full md:w-1/2'
-              label='Hotel Type'
-              name='room_type'
-              rules={[{
-                required: true,
-                message: 'Please input your Hotel Type!'
-              }]}
-            >
-              <Select
-                placeholder='-- select Hotel type --'
-                optionFilterProp='children'
-                options={[
-                  { value: 'single', label: 'Single' },
-                  { value: 'couple', label: 'Couple' },
-                  { value: 'presidential', label: 'Presidential' }
-                ]}
-                size='large'
-                allowClear
-              />
-            </Form.Item>
-
-            <Form.Item
-              className='w-full md:w-1/2'
               label='Hotel Price'
               name='room_price'
               rules={[{
@@ -194,6 +172,24 @@ function RoomEdit({ roomEditModal, setRoomEditModal }) {
               <InputNumber
                 className='w-full'
                 placeholder='Hotel Price'
+                type='number'
+                size='large'
+                min={1}
+                max={100000}
+              />
+            </Form.Item>
+            <Form.Item
+              className='w-full md:w-1/2'
+              label='Hotel Distance'
+              name='room_distance'
+              rules={[{
+                required: true,
+                message: 'Please input your Hotel Distance!'
+              }]}
+            >
+              <InputNumber
+                className='w-full'
+                placeholder='Hotel Distance'
                 type='number'
                 size='large'
                 min={1}

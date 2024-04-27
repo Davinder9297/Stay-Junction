@@ -29,6 +29,7 @@ function HostelEdit({ HostelEditModal, setHostelEditModal }) {
         hostel_name: fetchResponse?.data?.hostel_name || '',
         hostel_slug: fetchResponse?.data?.hostel_slug || '',
         hostel_price: fetchResponse?.data?.hostel_price || 0,
+        hostel_distance: fetchResponse?.data?.hostel_distance || 0,
         hostel_size: fetchResponse?.data?.hostel_size || '',
         hostel_room: fetchResponse?.data?.hostel_room || '',
         hostel_location: fetchResponse?.data?.hostel_location || '',
@@ -53,6 +54,7 @@ function HostelEdit({ HostelEditModal, setHostelEditModal }) {
     const formdata = new FormData();
     formdata.append('hostel_name', values.hostel_name);
     formdata.append('hostel_slug', values.hostel_slug);
+    formdata.append('hostel_distance', values.hostel_distance);
     formdata.append('hostel_price', values.hostel_price);
     formdata.append('hostel_size', values.hostel_size);
     formdata.append('hostel_room', values.hostel_room);
@@ -197,16 +199,16 @@ function HostelEdit({ HostelEditModal, setHostelEditModal }) {
           <div className='two-grid-column'>
             <Form.Item
               className='w-full md:w-1/2'
-              label='Hostel Size'
+              label='Hostel Room Size'
               name='hostel_size'
               rules={[{
                 required: true,
-                message: 'Please input your Hostel Size!'
+                message: 'Please input your Hostel Room Size!'
               }]}
             >
               <InputNumber
                 className='w-full'
-                placeholder='Hostel Size'
+                placeholder='Hostel Room Size'
                 type='number'
                 size='large'
                 min={1}
@@ -229,6 +231,27 @@ function HostelEdit({ HostelEditModal, setHostelEditModal }) {
                 size='large'
               />
             </Form.Item>
+          </div>
+          <div className='two-grid-column'>
+            <Form.Item
+              className='w-full md:w-1/2'
+              label='Hostel Distance'
+              name='hostel_distance'
+              rules={[{
+                required: true,
+                message: 'Please input your Hostel Distance!'
+              }]}
+            >
+              <InputNumber
+                className='w-full'
+                placeholder='Hostel Distance'
+                type='number'
+                size='large'
+                min={1}
+                max={1000}
+              />
+            </Form.Item>
+
           </div>
 
           <Form.Item

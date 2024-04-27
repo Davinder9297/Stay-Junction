@@ -54,7 +54,7 @@ function HostelDetails({ id }) {
           <Descriptions.Item
             label={<span className='whitespace-nowrap'>Hostel Price</span>}
           >
-            {`$ ${response?.data?.hostel_price}`}
+            {`₹ ${response?.data?.hostel_price}`}
           </Descriptions.Item>
 
           <Descriptions.Item
@@ -143,9 +143,15 @@ function HostelDetails({ id }) {
           </Descriptions.Item>
           <Descriptions.Item
             label={<span className='whitespace-nowrap'>Hostel Created At</span>}
-            span={2}
+            span={1}
           >
             {response?.data?.created_at?.split('T')[0]}
+          </Descriptions.Item>
+          <Descriptions.Item
+            label={<span className='whitespace-nowrap'>Hostel Distance</span>}
+            span={1}
+          >
+            {`${response?.data?.hostel_distance} KM`}
           </Descriptions.Item>
 
           <Descriptions.Item

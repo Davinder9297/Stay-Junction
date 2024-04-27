@@ -10,7 +10,7 @@ const MyQueryHelper = require('../configs/api.feature');
 exports.createRoom = async (req, res) => {
   try {
     const {
-      room_name,room_location,room_city,room_slug, room_type, room_price, room_size, room_capacity, allow_pets, provide_breakfast, featured_room, room_description, extra_facilities
+      room_name,room_distance,room_location,room_city,room_slug, room_type, room_price, room_size, room_capacity, allow_pets, provide_breakfast, featured_room, room_description, extra_facilities
     } = req.body;
 
     // check `room_name` filed exits
@@ -42,18 +42,6 @@ exports.createRoom = async (req, res) => {
     }
 
     // check `room_type` filed exits
-    if (!room_type) {
-      for (const element of req.files) {
-        fs.unlink(`${appRoot}/public/uploads/rooms/${element.filename}`, (err) => {
-          if (err) { logger.error(err); }
-        });
-      }
-      return res.status(400).json(errorResponse(
-        1,
-        'FAILED',
-        '`room_type` filed is required'
-      ));
-    }
 
     // check `room_price` filed exits
     if (!room_price) {
@@ -108,6 +96,18 @@ exports.createRoom = async (req, res) => {
         1,
         'FAILED',
         '`room_description` filed is required'
+      ));
+    }
+    if (!room_distance) {
+      for (const element of req.files) {
+        fs.unlink(`${appRoot}/public/uploads/rooms/${element.filename}`, (err) => {
+          if (err) { logger.error(err); }
+        });
+      }
+      return res.status(400).json(errorResponse(
+        1,
+        'FAILED',
+        '`room_distance` filed is required'
       ));
     }
 
@@ -174,6 +174,7 @@ exports.createRoom = async (req, res) => {
       room_name,
       room_slug,
       room_city,
+      room_distance,
       room_type,
       room_location,
       room_price,
@@ -216,7 +217,7 @@ exports.createHostel = async (req, res) => {
   // console.log("yes");
   try {
     const {
-      hostel_name, hostel_slug, hostel_price, hostel_size, hostel_room, provide_breakfast, provide_lunch, provide_dinner, hostel_location,mess, featured_hostel, extra_facilities,hostel_description,hostel_images,hostel_status
+      hostel_name,hostel_distance, hostel_slug, hostel_price, hostel_size, hostel_room, provide_breakfast, provide_lunch, provide_dinner, hostel_location,mess, featured_hostel, extra_facilities,hostel_description,hostel_images,hostel_status
     } = req.body;
     // console.log(req.body);
     
@@ -272,6 +273,18 @@ exports.createHostel = async (req, res) => {
         1,
         'FAILED',
         '`hostel_size` filed is required'
+      ));
+    }
+    if (!hostel_distance) {
+      for (const element of req.files) {
+        fs.unlink(`${appRoot}/public/uploads/rooms/${element.filename}`, (err) => {
+          if (err) { logger.error(err); }
+        });
+      }
+      return res.status(400).json(errorResponse(
+        1,
+        'FAILED',
+        '`hostel_distance` filed is required'
       ));
     }
 
@@ -348,7 +361,7 @@ exports.createHostel = async (req, res) => {
 
     // prepared user input room data to store database
     const data = {
-      hostel_name, hostel_slug, hostel_price, hostel_size, hostel_room, provide_breakfast, provide_lunch, provide_dinner, hostel_location,mess, featured_hostel, extra_facilities,hostel_description,
+      hostel_name,hostel_distance, hostel_slug, hostel_price, hostel_size, hostel_room, provide_breakfast, provide_lunch, provide_dinner, hostel_location,mess, featured_hostel, extra_facilities,hostel_description,
 hostel_images: req?.files?.map((file) => ({ url: `/uploads/rooms/${file.filename}` })),
       created_by: req.user.id
     };
@@ -391,6 +404,7 @@ exports.getRoomsList = async (req, res) => {
     const mappedRooms = findRooms?.map((data) => ({
       id: data._id,
       room_name: data.room_name,
+      room_distance:data.room_distance,
       room_city:data.room_city,
       room_slug: data.room_slug,
       room_location:data.room_location,
@@ -444,6 +458,7 @@ exports.getRoomsListbycity = async (req, res) => {
     const mappedRooms = findRooms?.map((data) => ({
       id: data._id,
       room_name: data.room_name,
+      room_distance:data.room_distance,
       room_city:data.room_city,
       room_slug: data.room_slug,
       room_location:data.room_location,
@@ -498,6 +513,7 @@ exports.getHostelsList = async (req, res) => {
       id: data._id,
       hostel_name: data.hostel_name,
       hostel_slug: data.hostel_slug,
+      hostel_distance:data.hostel_distance,
       hostel_price: data.hostel_price,
       hostel_size: data.hostel_size,
       hostel_room: data.hostel_room,
@@ -551,6 +567,7 @@ exports.getHostelsListbycity = async (req, res) => {
       id: data._id,
       hostel_name: data.hostel_name,
       hostel_slug: data.hostel_slug,
+      hostel_distance: data.hostel_distance,
       hostel_price: data.hostel_price,
       hostel_size: data.hostel_size,
       hostel_room: data.hostel_room,
@@ -615,6 +632,7 @@ exports.getRoomByIdOrSlugName = async (req, res) => {
       id: room?._id,
       room_name: room?.room_name,
       room_city:room?.room_city,
+      room_distance:room?.room_distance,
       room_location: room?.room_location,
       room_slug: room?.room_slug,
       room_type: room?.room_type,
@@ -686,6 +704,7 @@ exports.getHostelByIdOrSlugName = async (req, res) => {
       hostel_name: room?.hostel_name,
       hostel_slug: room?.hostel_slug,
       hostel_price: room?.hostel_price,
+      hostel_distance: room?.hostel_distance,
       hostel_size: room?.hostel_size,
       hostel_room: room?.hostel_room,
       hostel_location: room?.hostel_location,
@@ -739,7 +758,7 @@ exports.getHostelByIdOrSlugName = async (req, res) => {
 exports.editRoomByAdmin = async (req, res) => {
   try {
     const {
-      room_name,room_location,room_city, room_slug, room_type, room_price, room_size, room_capacity, allow_pets, provide_breakfast, featured_room, room_description, extra_facilities
+      room_name,room_distance,room_location,room_city, room_slug, room_type, room_price, room_size, room_capacity, allow_pets, provide_breakfast, featured_room, room_description, extra_facilities
     } = req.body;
 
     // check `room_name` filed exits
@@ -771,18 +790,6 @@ exports.editRoomByAdmin = async (req, res) => {
     }
 
     // check `room_type` filed exits
-    if (!room_type) {
-      for (const element of req.files) {
-        fs.unlink(`${appRoot}/public/uploads/rooms/${element.filename}`, (err) => {
-          if (err) { logger.error(err); }
-        });
-      }
-      return res.status(400).json(errorResponse(
-        1,
-        'FAILED',
-        '`room_type` filed is required '
-      ));
-    }
 
     // check `room_price` filed exits
     if (!room_price) {
@@ -855,18 +862,18 @@ exports.editRoomByAdmin = async (req, res) => {
     }
 
     // check `req.files[0]` filed exits
-    // if (!req.files[0]) {
-    //   for (const element of req.files) {
-    //     fs.unlink(`${appRoot}/public/uploads/rooms/${element.filename}`, (err) => {
-    //       if (err) { logger.error(err); }
-    //     });
-    //   }
-    //   return res.status(400).json(errorResponse(
-    //     1,
-    //     'FAILED',
-    //     'Minimum 1 `room_images` filed is required '
-    //   ));
-    // }
+    if (!req.files[0]) {
+      for (const element of req.files) {
+        fs.unlink(`${appRoot}/public/uploads/rooms/${element.filename}`, (err) => {
+          if (err) { logger.error(err); }
+        });
+      }
+      return res.status(400).json(errorResponse(
+        1,
+        'FAILED',
+        'Minimum 1 `room_images` filed is required '
+      ));
+    }
 
     // finding by room by room id
     let room = null;
@@ -884,13 +891,13 @@ exports.editRoomByAdmin = async (req, res) => {
     }
 
     // delete room old images
-    // (() => {
-    //   for (const element of room.room_images) {
-    //     fs.unlink(`${appRoot}/public/${element.url}`, (err) => {
-    //       if (err) { logger.error(err); }
-    //     });
-    //   }
-    // })();
+    (() => {
+      for (const element of room.room_images) {
+        fs.unlink(`${appRoot}/public/${element.url}`, (err) => {
+          if (err) { logger.error(err); }
+        });
+      }
+    })();
 
     // update room info & save database
     const updatedRoom = await Room.findByIdAndUpdate(
@@ -898,6 +905,7 @@ exports.editRoomByAdmin = async (req, res) => {
       {
         room_name,
         room_slug,
+        room_distance,
         room_city,
         room_location,
         room_type,
@@ -941,7 +949,7 @@ exports.editRoomByAdmin = async (req, res) => {
 exports.editHostelByAdmin = async (req, res) => {
   try {
     const {
-      hostel_name, hostel_slug, hostel_price, hostel_size, hostel_room, provide_breakfast, provide_lunch, provide_dinner, hostel_location,mess, featured_hostel, extra_facilities,hostel_description,hostel_images,hostel_status
+      hostel_name,hostel_distance, hostel_slug, hostel_price, hostel_size, hostel_room, provide_breakfast, provide_lunch, provide_dinner, hostel_location,mess, featured_hostel, extra_facilities,hostel_description,hostel_images,hostel_status
     } = req.body;
 
     // check `room_name` filed exits
@@ -1043,18 +1051,18 @@ exports.editHostelByAdmin = async (req, res) => {
       ));
     }
     // check `req.files[0]` filed exits
-    // if (!req.files[0]) {
-    //   for (const element of req.files) {
-    //     fs.unlink(`${appRoot}/public/uploads/rooms/${element.filename}`, (err) => {
-    //       if (err) { logger.error(err); }
-    //     });
-    //   }
-    //   return res.status(400).json(errorResponse(
-    //     1,
-    //     'FAILED',
-    //     'Minimum 1 `hostel_images` filed is required '
-    //   ));
-    // }
+    if (!req.files[0]) {
+      for (const element of req.files) {
+        fs.unlink(`${appRoot}/public/uploads/rooms/${element.filename}`, (err) => {
+          if (err) { logger.error(err); }
+        });
+      }
+      return res.status(400).json(errorResponse(
+        1,
+        'FAILED',
+        'Minimum 1 `hostel_images` filed is required '
+      ));
+    }
 
     // finding by room by room id
     let room = null;
@@ -1072,13 +1080,13 @@ exports.editHostelByAdmin = async (req, res) => {
     }
 
     // delete room old images
-    // (() => {
-    //   for (const element of room.hostel_images) {
-    //     fs.unlink(`${appRoot}/public/${element.url}`, (err) => {
-    //       if (err) { logger.error(err); }
-    //     });
-    //   }
-    // })();
+    (() => {
+      for (const element of room.hostel_images) {
+        fs.unlink(`${appRoot}/public/${element.url}`, (err) => {
+          if (err) { logger.error(err); }
+        });
+      }
+    })();
 
     // update room info & save database
     const updatedRoom = await Hostels.findByIdAndUpdate(
@@ -1087,6 +1095,7 @@ exports.editHostelByAdmin = async (req, res) => {
         hostel_name,
          hostel_slug,
           hostel_price,
+          hostel_distance,
            hostel_size, 
            hostel_room, 
            provide_breakfast, 
@@ -1220,6 +1229,7 @@ exports.getFeaturedRoomsList = async (req, res) => {
     const mappedRooms = findRooms?.map((data) => ({
       id: data._id,
       room_name: data.room_name,
+      room_distance: data.room_distance,
       room_city:data.room_city,
       room_slug: data.room_slug,
       room_location: data.room_location,
@@ -1275,6 +1285,7 @@ exports.getFeaturedHostelList = async (req, res) => {
     const mappedRooms = findRooms?.map((data) => ({
       id: data._id,
       hostel_name: data.hostel_name,
+      hostel_distance: data.hostel_distance,
       hostel_slug: data.hostel_slug,
       hostel_price: data.hostel_price,
       hostel_size: data.hostel_size,
