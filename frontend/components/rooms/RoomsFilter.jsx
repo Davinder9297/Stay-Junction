@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Title from '../home/Title';
+import Link from 'next/link';
 
 export default function RoomFilter({ ourRooms, setOurFilteredRooms }) {
   const [allowBreakfast, setAllowBreakfast] = useState(false);
@@ -45,11 +46,14 @@ export default function RoomFilter({ ourRooms, setOurFilteredRooms }) {
   useEffect(() => {
     filterRooms();
   }, [allowBreakfast, allowPets, cities, priceRange]);
-
+const [city, setCity] = useState('')
   return (
     <section className='filter-container'>
       <Title title='Filter Hotels' />
-
+      <div className="searchfeatured">
+        <input className='border ' value={city} onChange={(e) => setCity(e.target.value)} placeholder="Search hotels by city.." />
+        <Link href={`/searched?city=${city}`} className="searchbutton ">Search</Link>
+      </div>
       <form className='filter-form'>
         {/* Price range */}
         <div className='form-group'>
