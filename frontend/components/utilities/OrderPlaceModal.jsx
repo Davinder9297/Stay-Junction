@@ -16,7 +16,7 @@ const { confirm } = Modal;
 function OrderPlaceModal({ bookingModal, setBookingModal, slug }) {
   const [selectedDates, setSelectedDates] = useState([]);
   const router = useRouter();
-  console.log(slug);
+  // console.log(slug);
 
   // handle date change on date picker
   const handleDateChange = (dates) => {

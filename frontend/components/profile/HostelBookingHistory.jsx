@@ -127,32 +127,13 @@ function HostelBookingHistory() {
             },
             {
               key: 4,
-              title: 'Review & Ratting',
-              dataIndex: 'reviews',
-              render: (data) => (
-                <Tooltip
-                  title={data?.message}
-                  placement='top'
-                  trigger='hover'
-                >
-                  <span>
-                    {data ? (
-                      <Rate value={data?.rating} disabled />
-                    ) : 'N/A'}
-                  </span>
-                </Tooltip>
-              ),
-              align: 'center'
-            },
-            {
-              key: 5,
               title: 'Actions',
               dataIndex: 'actions',
               render: (_, record) => (
                 <Space size='middle'>
                   {record?.booking_status === 'pending' && (
                     <Button
-                      className='w-[85px]'
+                      className='w-[140px]'
                       type='default'
                       size='middle'
                       danger

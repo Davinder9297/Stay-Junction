@@ -61,6 +61,7 @@ function RoomPreview(props) {
                   <img
                     key={uniqueId()}
                     src={item?.url}
+                    className='h-[200px]'
                     alt={item?.url || 'room-details-img'}
                   />
                 ))}

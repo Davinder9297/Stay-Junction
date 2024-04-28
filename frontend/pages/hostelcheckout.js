@@ -42,7 +42,7 @@ function HostelCheckout() {
         description: 'Product description',
         image: responsedata?.data?.hostel_images[1]?.url,
         handler(response) {
-          router.push('/profile?tab=booking-history');
+          router.push('/profile?tab=hostel-booking-history');
         },
         prefill: {
           name: 'Customer Name',
@@ -76,11 +76,13 @@ function HostelCheckout() {
               key={uniqueId()}
               src={responsedata?.data?.hostel_images[0]?.url}
               alt={responsedata?.data?.hostel_images[0]?.url || 'hostel-details-img'}
+              className='h-[300px]'
             />
             <img
               key={uniqueId()}
               src={responsedata?.data?.hostel_images[1]?.url}
               alt={responsedata?.data?.hostel_images[1]?.url || 'hostel-details-img'}
+              className='h-[300px]'
             />
           </div>
 

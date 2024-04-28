@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Button, Empty, Pagination, Rate, Result, Skeleton, Tag, Tooltip
+  Button, Empty, Pagination, Result, Skeleton, Tag
 } from 'antd';
 import { v4 as uniqueId } from 'uuid';
 import useFetchData from '../../hooks/useFetchData';
@@ -72,7 +72,7 @@ function HostelOrders() {
                           Booked Hostel
                         </th>
                         <th className='data-table-head-tr-th text-center' scope='col'>
-                          Review & Rating
+                          Hostel Price
                         </th>
                         <th className='data-table-head-tr-th text-center' scope='col'>
                           Booking Actions
@@ -102,17 +102,9 @@ function HostelOrders() {
                           <td className='data-table-body-tr-td'>
                             {data?.room?.hostel_name}
                           </td>
-                          <Tooltip
-                            title={data?.reviews?.message}
-                            placement='top'
-                            trigger='hover'
-                          >
-                            <td className='data-table-body-tr-td text-center'>
-                              {data?.reviews ? (
-                                <Rate value={data?.reviews?.rating} disabled />
-                              ) : 'N/A'}
-                            </td>
-                          </Tooltip>
+                          <td className='data-table-body-tr-td'>
+                            {`₹ ${data?.room?.hostel_price}`}
+                          </td>
                           <td className='data-table-body-tr-td !px-0 text-center'>
                             {data?.booking_status !== 'cancel' && data?.booking_status !== 'rejected' && data?.booking_status !== 'in-reviews' && data?.booking_status !== 'completed' ? (
                               <Button

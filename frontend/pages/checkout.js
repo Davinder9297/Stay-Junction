@@ -75,11 +75,13 @@ function RoomCheckout() {
               key={uniqueId()}
               src={responsedata?.data?.room_images[0]?.url}
               alt={responsedata?.data?.room_images[0]?.url || 'room-details-img'}
+              className='h-[300px]'
             />
             <img
               key={uniqueId()}
               src={responsedata?.data?.room_images[1]?.url}
               alt={responsedata?.data?.room_images[1]?.url || 'room-details-img'}
+              className='h-[300px]'
             />
           </div>
 
@@ -94,7 +96,6 @@ function RoomCheckout() {
               <h6>{`Price : ₹ ${responsedata?.data?.room_price}`}</h6>
               <h6>{`Location : ${responsedata?.data?.room_location}`}</h6>
               <h6>{`Size : ${responsedata?.data?.room_size} SQFT`}</h6>
-              <h6>{`Total rooms : ${responsedata?.data?.room_capacity > 1 ? `${responsedata?.data?.room_capacity} rooms` : `${responsedata?.data?.room_capacity} person`}`}</h6>
               <Button
                 className='btn-primary'
                 type='default'

@@ -59,6 +59,7 @@ function HostelPreview(props) {
                   <img
                     key={uniqueId()}
                     src={item?.url}
+                    className='h-[200px]'
                     alt={item?.url || 'hostel-details-img'}
                   />
                 ))}
