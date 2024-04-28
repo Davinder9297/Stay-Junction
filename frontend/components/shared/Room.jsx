@@ -13,7 +13,7 @@ function Room({ room }) {
           </div>
           <div className='flex justify-between w-full text-sm text-blue-700'>
               <div>{room?.room_city}</div>
-              <div>15.3 km from centre</div>
+              <div>{room?.room_distance || 5.1} km from centre</div>
           </div>
         </div>
 

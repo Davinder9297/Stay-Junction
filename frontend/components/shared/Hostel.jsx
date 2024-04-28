@@ -12,7 +12,7 @@ function Hostel({ room }) {
             <div className=' text-xl'>₹ {room?.hostel_price}</div>
           </div>          <div className='flex justify-between w-full text-sm text-blue-700'>
               <div>{room?.hostel_location}</div>
-              <div>15.3 km from centre</div>
+              <div>{room?.hostel_distance || 5.1} km from centre</div>
           </div>
         </div>
 
