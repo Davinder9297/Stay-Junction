@@ -76,7 +76,7 @@ function RoomPreview(props) {
                 <article className='info'>
                   <h3>Information:</h3>
                   <h6>
-                    {`Price : ₹ ${props?.room?.data?.room_price}`}
+                    {`Price : ₹ ${props?.room?.data?.room_price} per day`}
                   </h6>
                   <h6>
                     {`Location : ${props?.room?.data?.room_location}`}

@@ -46,7 +46,15 @@ function OrderPlaceModal({ bookingModal, setBookingModal, slug }) {
                 if (res?.result_code === 0) {
                   // notificationWithIcon('success', 'SUCCESS', (res?.result?.message || 'Your room booking order placed successful'));
                   setBookingModal((prevState) => ({ ...prevState, open: false, roomId: null }));
-                  router.push(`/checkout?slug=${slug}`);
+                  var date1 = new Date(selectedDates[0]);
+                  var date2 = new Date(selectedDates[1]);
+
+                  // Calculate the difference in milliseconds
+                  var differenceMs = Math.abs(date2 - date1);
+
+                  // Convert milliseconds to days
+                  var differenceDays = Math.ceil(differenceMs / (1000 * 60 * 60 * 24));
+                  router.push(`/checkout?slug=${slug}&days=${differenceDays}`);
                   setSelectedDates([]);
                 } else {
                   notificationWithIcon('error', 'ERROR', 'Sorry! Something went wrong. App server error');

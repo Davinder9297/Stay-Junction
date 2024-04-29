@@ -73,7 +73,7 @@ function HostelPreview(props) {
 
                 <article className='info'>
                   <h3>Information:</h3>
-                  <h6>{`Price : ₹ ${props?.room?.data?.hostel_price}`}</h6>
+                  <h6>{`Price : ₹ ${props?.room?.data?.hostel_price} per week`}</h6>
                   <h6>{`Size : ${props?.room?.data?.hostel_size} SQFT`}</h6>
                   <h6>{`Location : ${props?.room?.data?.hostel_location}`}</h6>
                   <h6>{props?.room?.data?.provide_breakfast && 'free breakfast included'}</h6>

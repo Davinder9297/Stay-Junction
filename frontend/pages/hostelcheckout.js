@@ -36,7 +36,7 @@ function HostelCheckout() {
     script.onload = () => {
       const options = {
         key: 'rzp_test_jmLsdK6FoWIRSe',
-        amount: responsedata?.data?.hostel_price * 100,
+        amount: (responsedata?.data?.hostel_price * 100*search.get('days')).toFixed(2),
         currency: 'INR',
         name: 'Stay Junction',
         description: 'Product description',
@@ -94,7 +94,7 @@ function HostelCheckout() {
 
             <article className='info'>
               <h3>Information:</h3>
-              <h6>{`Price : ₹ ${responsedata?.data?.hostel_price}`}</h6>
+              <h6>{`Total Price : ₹ ${(responsedata?.data?.hostel_price*search.get('days')).toFixed(2)}`}</h6>
               <h6>{`Location : ${responsedata?.data?.hostel_location}`}</h6>
               <h6>{`Size : ${responsedata?.data?.hostel_size} SQFT`}</h6>
               <Button

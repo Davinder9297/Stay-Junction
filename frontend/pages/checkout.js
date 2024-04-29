@@ -14,7 +14,7 @@ function RoomCheckout() {
   const [responsedata, setResponsedata] = useState();
   const router = useRouter();
   const search = useSearchParams();
-
+  
   useEffect(() => {
     async function fetchData() {
       try {
@@ -35,7 +35,7 @@ function RoomCheckout() {
     script.onload = () => {
       const options = {
         key: 'rzp_test_jmLsdK6FoWIRSe',
-        amount: responsedata?.data?.room_price * 100, // Amount in paisa
+        amount: responsedata?.data?.room_price * 100 *search.get('days'), // Amount in paisa
         currency: 'INR',
         name: 'Stay Junction',
         description: 'Product description',
@@ -93,7 +93,7 @@ function RoomCheckout() {
 
             <article className='info'>
               <h3>Information:</h3>
-              <h6>{`Price : ₹ ${responsedata?.data?.room_price}`}</h6>
+              <h6>{`Total Price : ₹ ${responsedata?.data?.room_price*search.get('days')}`}</h6>
               <h6>{`Location : ${responsedata?.data?.room_location}`}</h6>
               <h6>{`Size : ${responsedata?.data?.room_size} SQFT`}</h6>
               <Button

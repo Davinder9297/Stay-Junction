@@ -9,7 +9,7 @@ function Room({ room }) {
         <div className='gap-y-3 flex flex-col'>
           <div className='flex justify-between w-full '>
             <div className='font-semibold text-xl max-w-[80%]'>{room?.room_name}</div>
-            <div className=' text-xl'>₹ {room?.room_price}</div>
+            <div className=' text-xl'>₹ {room?.room_price}/day</div>
           </div>
           <div className='flex justify-between w-full text-sm text-blue-700'>
               <div>{room?.room_city}</div>

@@ -45,7 +45,18 @@ function HostelOrderPlaceModal({ bookingModal, setBookingModal, slug }) {
                 if (res?.result_code === 0) {
                   // notificationWithIcon('success', 'SUCCESS', (res?.result?.message || 'Your hostel booking order placed successful'));
                   setBookingModal((prevState) => ({ ...prevState, open: false, roomId: null }));
-                  router.push(`/hostelcheckout?slug=${slug}`);
+                  var date1 = new Date(selectedDates[0]);
+                  var date2 = new Date(selectedDates[1]);
+
+                  // Calculate the difference in milliseconds
+                  var differenceMs = Math.abs(date2 - date1);
+
+                  // Convert milliseconds to days
+                  var differenceDays = differenceMs / (1000 * 60 * 60 * 24);
+
+                  // Calculate the number of weeks
+                  var differenceWeeks = differenceDays / 7;
+                  router.push(`/hostelcheckout?slug=${slug}&days=${differenceWeeks.toFixed(2)}`);
                   setSelectedDates([]);
                 } else {
                   notificationWithIcon('error', 'ERROR', 'Sorry! Something went wrong. App server error');
