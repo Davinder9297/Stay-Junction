@@ -18,7 +18,7 @@ export default function HostelFilter({ ourRooms, setOurFilteredRooms }) {
       Chennai: false,
     },
   });
-  const [priceRange, setPriceRange] = useState([6000, 50000]); // Default price range
+  const [priceRange, setPriceRange] = useState([500, 1000]); // Default price range
 
   // Function to filter rooms based on checkboxes and price range
   const filterRooms = () => {
@@ -61,17 +61,17 @@ export default function HostelFilter({ ourRooms, setOurFilteredRooms }) {
       <form className='filter-form'>
         {/* room price start */}
         <div className='form-group'>
-          <label htmlFor='price'>Started Price ₹{priceRange[0]}</label>
+          <label htmlFor='price'>Started Price ₹{priceRange[0]} per week</label>
           <input
             className='form-control'
             type='range'
             name='price'
             id='price'
-            min={6000}
-            max={50000}
-            defaultValue={50000}
+            min={500}
+            max={1000}
+            defaultValue={1000}
             value={priceRange[1]}
-            onChange={(e) => setPriceRange([6000, parseInt(e.target.value, 10)])}
+            onChange={(e) => setPriceRange([500, parseInt(e.target.value, 10)])}
           />
           <span>₹{priceRange[1]}</span>
         </div>
