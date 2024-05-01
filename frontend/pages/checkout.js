@@ -34,7 +34,7 @@ function RoomCheckout() {
     document.body.appendChild(script);
     script.onload = () => {
       const options = {
-        key: 'rzp_test_jmLsdK6FoWIRSe',
+        key: 'rzp_test_6EEnhpEmOp7S6S',
         amount: responsedata?.data?.room_price * 100 *search.get('days'), // Amount in paisa
         currency: 'INR',
         name: 'Stay Junction',
@@ -44,8 +44,8 @@ function RoomCheckout() {
           router.push('/profile?tab=booking-history');
         },
         prefill: {
-          name: 'Customer Name',
-          email: 'customer@example.com',
+          name: 'Stay Junction',
+          email: 'customer@stayjunction.com',
           contact: '8283929792'
         },
         theme: {

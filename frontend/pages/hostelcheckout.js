@@ -35,7 +35,7 @@ function HostelCheckout() {
     document.body.appendChild(script);
     script.onload = () => {
       const options = {
-        key: 'rzp_test_jmLsdK6FoWIRSe',
+        key: 'rzp_test_6EEnhpEmOp7S6S',
         amount: (responsedata?.data?.hostel_price * 100*search.get('days')).toFixed(2),
         currency: 'INR',
         name: 'Stay Junction',
@@ -45,8 +45,8 @@ function HostelCheckout() {
           router.push('/profile?tab=hostel-booking-history');
         },
         prefill: {
-          name: 'Customer Name',
-          email: 'customer@example.com',
+          name: 'Stay Junction',
+          email: 'customer@stayjunction.com',
           contact: '8283929792'
         },
         theme: {
