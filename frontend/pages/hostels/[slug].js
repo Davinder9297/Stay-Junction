@@ -112,9 +112,11 @@ function HostelPreview(props) {
 
 export async function getServerSideProps(ctx) {
   try {
+    // const base=publicRuntimeConfig.API_BASE_URL;
+    const base='https://stayjunction.mrsahil.in';
     // Fetch data from the server-side API
     const response = await axios.get(
-      `${publicRuntimeConfig.API_BASE_URL}/api/v1/get-hostel-by-id-or-slug-name/${ctx.query.slug}`
+      `${base}/api/v1/get-hostel-by-id-or-slug-name/${ctx.query.slug}`
     );
     const room = response?.data?.result;
 
@@ -133,5 +135,7 @@ export async function getServerSideProps(ctx) {
     };
   }
 }
+
+
 
 export default HostelPreview;

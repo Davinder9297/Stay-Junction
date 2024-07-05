@@ -12,6 +12,7 @@ import Loading from '../../components/shared/Loading';
 import OrderPlaceModal from '../../components/utilities/OrderPlaceModal';
 import { getSessionToken, getSessionUser } from '../../utils/authentication';
 import notificationWithIcon from '../../utils/notification';
+import RoomReviewList from '../../components/utilities/RoomReviewList';
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -117,11 +118,11 @@ function RoomPreview(props) {
               </div>
 
               {/* room reviews list */}
-              {/* <div className='single-room-images'>
+               <div className='single-room-images'>
                 {props?.room?.data?.id && (
                   <RoomReviewList roomId={props?.room?.data?.id} />
                 )}
-              </div> */}
+              </div>
             </section>
           </>
         )}
@@ -142,8 +143,10 @@ function RoomPreview(props) {
 export async function getServerSideProps(ctx) {
   try {
     // Fetch data from the server-side API
+       // const base=publicRuntimeConfig.API_BASE_URL;
+       const base='https://stayjunction.mrsahil.in';
     const response = await axios.get(
-      `${publicRuntimeConfig.API_BASE_URL}/api/v1/get-room-by-id-or-slug-name/${ctx.query.slug}`
+      `${base}/api/v1/get-room-by-id-or-slug-name/${ctx.query.slug}`
     );
     const room = response?.data?.result;
 

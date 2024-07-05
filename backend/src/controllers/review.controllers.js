@@ -58,7 +58,7 @@ exports.roomReviewAdd = async (req, res) => {
     }
 
     // check booking status is `in-reviews`
-    if (myBooking.booking_status !== 'in-reviews') {
+    if (myBooking.booking_status !== 'approved') {
       return res.status(400).json(errorResponse(
         1,
         'FAILED',

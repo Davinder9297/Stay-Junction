@@ -143,7 +143,7 @@ function BookingHistory() {
                     </Button>
                   )}
 
-                  {record?.booking_status === 'in-reviews' && (
+                  {record?.booking_status === 'approved' && (
                     <Button
                       className='w-[85px]'
                       type='primary'

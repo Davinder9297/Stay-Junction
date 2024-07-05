@@ -7,7 +7,7 @@ function HostelStatusUpdateModal({ statusUpdateModal, setStatusUpdateModal, setF
   const [roomStatus, setRoomStatus] = useState([
     { value: 'approved', label: 'Approved', disabled: false },
     { value: 'rejected', label: 'Rejected', disabled: false },
-    { value: 'in-reviews', label: 'In Reviews', disabled: true }
+    { value: 'in-reviews', label: 'In Reviews', disabled: false }
   ]);
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(null);
